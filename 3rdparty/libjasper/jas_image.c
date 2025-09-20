@@ -1033,6 +1033,36 @@ error:
     return -1;
 }
 
+/**
+ * Create a new image component by sampling/resampling an existing component.
+ *
+ * The function inserts a new component into `image` at index `newcmptno` with
+ * origin (ho, vo), sampling steps (hs, vs), precision `prec`, and signedness
+ * `sgnd`. For each sample in the new component, the nearest sample from the
+ * source component `cmptno` is selected (based on squared Euclidean distance
+ * to the four surrounding source grid points), read, converted if necessary to
+ * the new precision/signedness, and written into the new component's data
+ * stream.
+ *
+ * Preconditions:
+ * - `cmptno` must be a valid component index in `image`.
+ * - The source component is expected to have tlx == 0 and tly == 0 (asserted).
+ *
+ * Parameters:
+ * @param image Image containing the source component and into which the new
+ *        component will be added.
+ * @param cmptno Index of the existing (source) component to sample from.
+ * @param newcmptno Index at which the new component will be inserted (or
+ *        appended if appropriate).
+ * @param ho Horizontal origin (tlx) for the new component.
+ * @param vo Vertical origin (tly) for the new component.
+ * @param hs Horizontal sampling step for the new component.
+ * @param vs Vertical sampling step for the new component.
+ * @param sgnd Signedness for samples in the new component (nonzero = signed).
+ * @param prec Bit precision for samples in the new component.
+ *
+ * @return 0 on success, -1 on error (e.g., memory/IO failure or internal seek/read/write error).
+ */
 int jas_image_sampcmpt(jas_image_t *image, int cmptno, int newcmptno,
   jas_image_coord_t ho, jas_image_coord_t vo, jas_image_coord_t hs,
   jas_image_coord_t vs, int sgnd, int prec)
