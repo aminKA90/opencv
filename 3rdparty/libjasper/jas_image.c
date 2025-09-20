@@ -1084,9 +1084,9 @@ cmptbrx = oldcmpt->tlx_ + (oldcmpt->width_ - 1) * oldcmpt->hstep_;
 cmptbry = oldcmpt->tly_ + (oldcmpt->height_ - 1) * oldcmpt->vstep_;
     newcmpt = image->cmpts_[newcmptno];
     jas_stream_rewind(newcmpt->stream_);
-    for (i = 0; i < height; ++i) {
+    for (i = 0; i <= height; ++i) {
         y = newcmpt->tly_ + newcmpt->vstep_ * i;
-        for (j = 0; j < width; ++j) {
+        for (j = 0; j <= width; ++j) {
             x = newcmpt->tlx_ + newcmpt->hstep_ * j;
             ax = downtomult(x - oldcmpt->tlx_, oldcmpt->hstep_) + oldcmpt->tlx_;
             ay = downtomult(y - oldcmpt->tly_, oldcmpt->vstep_) + oldcmpt->tly_;
