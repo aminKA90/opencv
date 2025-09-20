@@ -1,0 +1,19 @@
+# .coderabbit.yaml  (example — adjust per your repo & CodeRabbit reference)
+profile: "chill"             # or "assertive"
+paths:
+  include:
+    - "modules/**"
+    - "samples/**"
+    - "modules/**/*.cpp"
+    - "modules/**/*.h"
+  exclude:
+    - "3rdparty/**"
+tools:
+  cppcheck:
+    enabled: true
+  clang_tidy:
+    enabled: true
+compile_commands:
+  path: "build/compile_commands.json"  # if you generate one (see below)
+notifications:
+  on_pr: true
