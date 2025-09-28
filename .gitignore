@@ -1,6 +1,8 @@
 # ignore dot files/directories
 .*
 !.gitignore
+!.coderabbit.yaml
+!.coderabbit/
 
 *.autosave
 *.pyc

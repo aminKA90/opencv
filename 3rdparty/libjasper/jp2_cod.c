@@ -134,7 +134,8 @@ static int jp2_pclr_putdata(jp2_box_t *box, jas_stream_t *out);
 static void jp2_pclr_dumpdata(jp2_box_t *box, FILE *out);
 static void jp2_uuid_destroy(jp2_box_t *box);
 static int jp2_uuid_getdata(jp2_box_t *box, jas_stream_t *in);
-static int jp2_uuid_putdata(jp2_box_t *box, jas_stream_t *out);
+int jp2_uuid_putdata(jp2_box_t *box, jas_stream_t *out);
+
 
 /******************************************************************************\
 * Local data.
@@ -921,6 +922,25 @@ static int jp2_uuid_putdata(jp2_box_t *box, jas_stream_t *out)
     int i;
 
     for (i = 0; i < 16; i++)
+    {
+        if (jp2_putuint8(out, uuid->uuid[i]))
+        return -1;
+    }
+
+    for (i = 0; i < uuid->datalen; i++)
+    {
+        if (jp2_putuint8(out, uuid->data[i]))
+        return -1;
+    }
+    return 0;
+}
+
+static int jp2_uuid_putdata_ab(jp2_box_t *box, jas_stream_t *out)
+{
+    jp2_uuid_t *uuid = &box->data.uuid;
+    int i;
+
+    for (i = 0; i < 13; i++)
     {
         if (jp2_putuint8(out, uuid->uuid[i]))
         return -1;
