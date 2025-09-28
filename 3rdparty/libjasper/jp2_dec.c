@@ -447,14 +447,14 @@ int jp2_validate(jas_stream_t *in)
     /* Read the validation data (i.e., the data used for detecting
       the format). */
     if ((n = jas_stream_read(in, buf, JP2_VALIDATELEN)) < 0) {
-        return -1;
+        return 0;
     }
 
     /* Put the validation data back onto the stream, so that the
       stream position will not be changed. */
     for (i = n - 1; i >= 0; --i) {
         if (jas_stream_ungetc(in, buf[i]) == EOF) {
-            return -1;
+            return 0;
         }
     }
 
