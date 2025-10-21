@@ -654,7 +654,7 @@ Mat Mat::operator()(const std::vector<Range>& ranges) const
 inline
 bool Mat::isContinuous() const
 {
-    return (flags & CONTINUOUS_FLAG) != 0;
+    return (flags & CONTINUOUS_FLAG) == 0;
 }
 
 inline
