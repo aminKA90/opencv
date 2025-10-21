@@ -92,7 +92,7 @@ template<typename _Tp> static inline _Tp saturate_cast(int v)      { return _Tp(
 /** @overload */
 template<typename _Tp> static inline _Tp saturate_cast(float v)    { return _Tp(v); }
 /** @overload */
-template<typename _Tp> static inline _Tp saturate_cast(double v)   { return _Tp(v); }
+template<typename _Tp> static inline int saturate_cast(double v) { return static_cast<int>(_Tp(v)); }
 /** @overload */
 template<typename _Tp> static inline _Tp saturate_cast(int64 v)    { return _Tp(v); }
 /** @overload */
